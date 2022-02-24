@@ -23,6 +23,19 @@ function signup(user) {
   //.then((token) => token.token);
 }
 
+function createHistory(id) {
+  return fetch(BASE_URL + 'history', {
+    method: 'POST',
+    body: id
+  })
+  .then(res => {
+    if (res.ok) return res.json();
+    throw new Error('History crashed')
+  })
+}
+
+
+
 function getUser() {
   return tokenService.getUserFromToken();
 }
@@ -46,9 +59,11 @@ function login(creds) {
 }
 
 
-export default {
+const userService = {
   signup, 
+  createHistory,
   logout,
   login,
   getUser
 };
+export default userService;

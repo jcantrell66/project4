@@ -5,6 +5,7 @@ const multer = require('multer');
 const upload = multer();
 /*---------- Public Routes ----------*/
 router.post('/signup', upload.single('photo'), usersCtrl.signup);
+router.post('/history', usersCtrl.history);
 router.post('/login', usersCtrl.login);
 
 /*---------- Protected Routes ----------*/

@@ -4,13 +4,23 @@ import "./App.css";
 import SignupPage from "../SignupPage/SignupPage";
 import LoginPage from "../LoginPage/LoginPage";
 import userService from "../../utils/userService";
+import HomePage from "../HomePage/HomePage";
+
 
 function App() {
   const [user, setUser] = useState(userService.getUser()); // getUser decodes our JWT token, into a javascript object
   // this object corresponds to the jwt payload which is defined in the server signup or login function that looks like
   // this  const token = createJWT(user); // where user was the document we created from mongo
 
-  function handleSignUpOrLogin() {
+
+  function handleSignUp() {
+    setUser(userService.getUser());
+    // userService.createHistory(user.id);
+  }
+
+
+
+  function handleLogin() {
     setUser(userService.getUser()); // getting the user from localstorage decoding the jwt
   }
 
@@ -22,14 +32,14 @@ function App() {
   if (user) {
     return (
       <Routes>
-        <Route path="/" element={<h1>This is Home Page!</h1>} />
+        <Route path="/" element={<HomePage user={user} handleLogout={handleLogout} />} />
         <Route
           path="/login"
-          element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+          element={<LoginPage handleLogin={handleLogin} />}
         />
         <Route
           path="/signup"
-          element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+          element={<SignupPage handleSignUp={handleSignUp} />}
         />
       </Routes>
     );
@@ -39,11 +49,11 @@ function App() {
     <Routes>
       <Route
         path="/login"
-        element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+        element={<LoginPage handleLogin={handleLogin} />}
       />
       <Route
         path="/signup"
-        element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+        element={<SignupPage handleSignUp={handleSignUp} />}
       />
       <Route path="/*" element={<Navigate to="/login" />} />
     </Routes>

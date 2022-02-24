@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const History = require('../models/history');
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
 const { v4: uuidv4 } = require('uuid');
@@ -8,6 +9,7 @@ const s3 = new S3(); // initialize the construcotr
 
 module.exports = {
   signup,
+  history,
   login
 };
 
@@ -34,13 +36,19 @@ function signup(req, res) {
       // Probably a duplicate email
       res.status(400).json(err);
     }
-
-
-
   })
   //////////////////////////////////////////////////////////////////////////////////
- 
 }
+
+function history(req, res) {
+  console.log(req, '<= this should be the user id')
+  const history = new History({
+    user: req.body
+  })
+}
+
+
+
 
 async function login(req, res) {
   try {
