@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "./HomePage.css";
 // import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-import userService from "../../utils/userService";
-import tokenService from "../../utils/tokenService";
 import * as gamesApi from "../../utils/gamesApi";
 import Header from "../../components/Header/Header";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import GameFeed from "../../components/GameFeed/GameFeed";
 import { Grid } from "semantic-ui-react";
+import Loading from "../../components/Loader/Loader";
 
-const axios = require('axios').default;
+// const axios = require('axios').default;
 
 export default function HomePage({ user, handleLogout }) {
     const [games, setGames] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
 
@@ -21,8 +20,9 @@ export default function HomePage({ user, handleLogout }) {
         console.log(game, '<= this is the game name')
         try {
             setLoading(true);
-            let duplicate = games.find(element => element.name === game)
+            let duplicate = games.find(element => element.name.replace(/[^a-z0-9]/gi, '').toLowerCase() === game.replace(/[^a-z0-9]/gi, '').toLowerCase())
             if (duplicate) {
+                setLoading(false);
                 setError('Duplicate game!')
                 return
             }
@@ -35,6 +35,7 @@ export default function HomePage({ user, handleLogout }) {
             setLoading(false);
             setError('')
         } catch (err) {
+            setLoading(false);
             setError(err.message);
             console.log(err);
             setError(err.message);
@@ -48,6 +49,7 @@ export default function HomePage({ user, handleLogout }) {
             setGames([...data.gameData]);
             setLoading(false);
         } catch (err) {
+            setLoading(false);
             console.log(err.message, " this is the error");
             setError(err.message);
         }
@@ -70,8 +72,8 @@ export default function HomePage({ user, handleLogout }) {
 
     async function removeGame(gameId) {
         try {
-            const data = await gamesApi.deleteApi(gameId);
-            getGames(); // < - will get all the posts and update the state, with our like added to the post
+            await gamesApi.deleteApi(gameId);
+            getGames();
         } catch (err) {
             console.log(err.message);
             setError(err.message);
@@ -86,14 +88,14 @@ export default function HomePage({ user, handleLogout }) {
     }, []);
 
 
-    // if (loading) {
-    //     return (
-    //       <>
-    //         <Header handleLogout={handleLogout} user={user} />
-    //         <Loading />
-    //       </>
-    //     );
-    //   }
+    if (loading) {
+        return (
+          <>
+            <Header handleLogout={handleLogout} />
+            <Loading />
+          </>
+        );
+      }
 
     // if (error) {
     //     return (

@@ -1,9 +1,8 @@
 import React from 'react';
-import { Card, Icon, Image, Button, Grid } from 'semantic-ui-react'
-import { Link } from "react-router-dom";
+import { Card, Icon, Button, Grid } from 'semantic-ui-react'
 import "./GameCard.css";
 
-function GameCard({ game, isProfile, user, removeGame, handleReloadGame }) {
+function GameCard({ game, removeGame, handleReloadGame }) {
 
   function clickHandler() {
     removeGame(game._id)
@@ -24,9 +23,7 @@ function GameCard({ game, isProfile, user, removeGame, handleReloadGame }) {
       <Card.Content>
 
         <Card.Description>
-          <Card>
-            <p className={`ui black header`}>Current player count: <span className={`ui ${game.color} header`}>{` ${game.playerCount}`}</span></p>
-          </Card>
+            <p ><span className={`ui black header`}>Current player count: </span><span className={`ui ${game.color} header`}>{` ${game.playerCount}`}</span></p>
         </Card.Description>
 
       </Card.Content>
@@ -46,7 +43,6 @@ function GameCard({ game, isProfile, user, removeGame, handleReloadGame }) {
               </Button>
             </div>
           </Grid.Column>
-          {/* </Grid.Column> */}
         </Grid.Row>
       </Grid>
     </Card >

@@ -13,9 +13,15 @@ const axios = require('axios');
 const create = async (req, res) => {
     // console.log(req.body, '<= req.body', req.user, '<= req.user')
     try {
+        const replaced = req.body.data.replace(/[^a-z0-9]/gi, '').toLowerCase();
+        console.log(replaced, '<= new string from reg exp');
         let allGames = await axios.get(`http://api.steampowered.com/ISteamApps/GetAppList/v0002`)
         let gameArray = allGames.data.applist.apps
-        let appid = gameArray.find(element => element.name === req.body.data)
+
+        // trying it with reg exp
+        let appid = gameArray.find(element => element.name.replace(/[^a-z0-9]/gi, '').toLowerCase() === req.body.data.replace(/[^a-z0-9]/gi, '').toLowerCase())
+
+
         console.log(appid.appid, '<= game id')
         let data = await axios.get(`http://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v0001/?appid=${appid.appid}`);
         // console.log(data, '<= game stats')
