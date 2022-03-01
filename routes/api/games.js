@@ -5,7 +5,9 @@ const multer = require('multer');
 const upload = multer();
 /*---------- Public Routes ----------*/
 router.post('/', gamesCtrl.create)
-router.get('/', gamesCtrl.getAPI)
+router.get('/', gamesCtrl.getGames)
+router.delete('/:id', gamesCtrl.deleteGame)
+router.post('/:id', gamesCtrl.reloadGame)
 // router.get('/', disableCors, gamesCtrl.getAPI)
 
 

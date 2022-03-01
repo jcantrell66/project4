@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Button, Form, Grid, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Segment, Header } from 'semantic-ui-react'
 
 export default function SearchGames(props){
   const [state, setState] = useState({
@@ -32,6 +32,9 @@ export default function SearchGames(props){
     <Grid textAlign='center' verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
         <Segment>
+          <Header>
+          Enter game here:
+          </Header>
         
             <Form  autoComplete="off" onSubmit={handleSubmit}>
             
@@ -43,7 +46,9 @@ export default function SearchGames(props){
                   onChange={handleChange}
                   required
               />   
-
+          <Header>
+          {props.error}
+          </Header>
               <Button
                 type="submit"
                 className="btn"

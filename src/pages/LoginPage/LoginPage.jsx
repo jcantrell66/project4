@@ -23,7 +23,7 @@ export default function LoginPage(props) {
 
   const [error, setError] = useState("");
   const [state, setState] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -67,10 +67,10 @@ export default function LoginPage(props) {
           <Form autoComplete="off" onSubmit={handleSubmit}>
             <Segment stacked>
               <Form.Input
-                type="email"
-                name="email"
-                placeholder="email"
-                value={state.email}
+                type="username"
+                name="username"
+                placeholder="username"
+                value={state.username}
                 onChange={handleChange}
                 required
               />
