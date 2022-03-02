@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./HomePage.css";
-// import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import * as gamesApi from "../../utils/gamesApi";
 import Header from "../../components/Header/Header";
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -8,7 +7,6 @@ import GameFeed from "../../components/GameFeed/GameFeed";
 import { Grid } from "semantic-ui-react";
 import Loading from "../../components/Loader/Loader";
 
-// const axios = require('axios').default;
 
 export default function HomePage({ user, handleLogout }) {
     const [games, setGames] = useState([]);
@@ -26,9 +24,7 @@ export default function HomePage({ user, handleLogout }) {
                 setError('Duplicate game!')
                 return
             }
-            const data = await gamesApi.queryApi(game); // our server is going to return
-            // the created post, that will be inside of data, which is the response from
-            // the server, we then want to set it in state
+            const data = await gamesApi.queryApi(game);
             console.log(data.gameData, " this is response from the server, in handleAddGame");
             setGames([data.gameData, ...games]);
             console.log(games)
@@ -57,12 +53,9 @@ export default function HomePage({ user, handleLogout }) {
 
     async function handleReloadGame(id, name, appid, playerCount) {
         try {
-            // console.log(name, id, appid, playerCount, '<= name and id of game')
             const data = await gamesApi.reloadApi(appid, playerCount, id);
-            console.log(games, '<= games state after pushing colorCount')
-            console.log(data, '<= 1 updated game')
             getGames();
-
+            setError('')
         } catch (err) {
             setError(err.message);
             console.log(err);
@@ -96,16 +89,6 @@ export default function HomePage({ user, handleLogout }) {
           </>
         );
       }
-
-    // if (error) {
-    //     return (
-    //         <>
-    //             <Header handleLogout={handleLogout} user={user} />
-    //             <ErrorMessage error={error} />;
-    //         </>
-    //     );
-    // }
-
 
 
 

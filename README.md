@@ -1,39 +1,31 @@
-## Setup 
+# PlayerCount Tracker
 
-1. Clone the repo
-2. Rename the folder to your Project, you can use the `mv` command like `mv mern-boilerplate yourprojectname`
-3. Delete the `.git` file, when you are in the root of the file, you can press `ls` and you should see a `.git` file, then go ahead and run `rm -rf .git`
+Welcome to PlayerCount Tracker, an app that allows you to view and track the player count from all of your favorite steam games! Using the steam API, you can input multiple steam games or app names, and compare them with other games on the platform. Clicking the reload button updates the current player count from the API; if the number is green, the count increased, if red, it decreased, and if it is grey, the API has not yet updated. Play around and see how many people are playing you favorite (or most hated) games!<br>
+
+## Screenshots
+<img src="https://imgur.com/JRZcYYo.png">
+☐ Screenshot after a game has been added to the display through the search function.<br><br>
+<img src="https://imgur.com/DHrMKFR.png">
+☐ Screenshot after the reload function was used, indicating that the player count has decreased.<br><br>
+
+## Technologies Used
+
+- Javascript, html, CSS
+- MongoDB/Mongoose
+- Express
+- React
+- Node
+- Semantic UI<br>
 
 
-#### Setup your git repo
+## Getting Started
 
-1. go to github and create your github and create a repo (Without a readme or liscense you can add that later!)
-2.  Then follow the directions on github that says ```…or create a new repository on the command line```
+Launch the app by clicking [here!](https://steamapiuser.herokuapp.com/) Sign up or login to access the functionality of the website. To view the planning stages for the project, this [trello board](https://trello.com/b/D2ICTOF1/project-4) contains the original plans behind the app.<br>
 
-it should look like this
 
-```
-git init
-git add .
-git commit -m "first commit"
-git remote add origin git@git.generalassemb.ly:SEI-CC/test.git // this will be whatever your address will be
-git push -u origin master
-```
+## Next Steps
 
-#### Setup the App
-
-```npm install```
-
-*DOTENV*
-
-`touch .env`
-
-add your variables
-
-```
-DATABASE_URL=mongodb://localhost:27017/testagramV2
-BUCKET_NAME=catcollectorone
-SECRET=mysecretforjwt
-```
-
-The app is configured, to use those respective key names for the database, jwt secret and aws bucket, of course you'll have your own values
+- Creating a 'watching' list, allowing users to save games to a profile to view later
+- Display additional statistics on each game card created, such as total downloads, average time played, etc.
+- Show information specific to the game when the user clicks on the game card, such as in-game achievements (which are not comparable between two games, unfortunately)
+- Contruct a graph or table tracking total players over time

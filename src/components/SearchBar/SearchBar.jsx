@@ -19,11 +19,7 @@ export default function SearchGames(props){
 
   function handleSubmit(e){
     e.preventDefault()
-    // const formData = new FormData()
-    // formData.append('game', state.game)
-    // props.handleAddGame(formData)
 	props.handleAddGame(state.game)
-    // Have to submit the form now! We need a function!
   }
 
 
